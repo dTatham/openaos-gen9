@@ -1,0 +1,63 @@
+#!/bin/sh
+
+##
+#  BuBU <bubu@openaos.org>
+##
+
+set -x
+
+# Early init stuff
+/bin/mount -t devtmpfs devtmpfs /dev
+/bin/mount -t proc proc /proc
+/bin/mount -o remount,rw / # REMOUNT_ROOTFS_RW
+/bin/mkdir -p /dev/pts
+/bin/mkdir -p /dev/shm
+/bin/mount -a
+/bin/hostname -F /etc/hostname
+# now run any rc scripts
+/etc/init.d/rcS
+
+SERIAL_EARLY=0
+
+. /etc/scripts/openaos_lib.sh
+
+prepareFilesystem
+
+enable_lcd
+
+display_banner
+
+setInputNodes
+
+if [ $SERIAL_EARLY -eq 1 ]; then
+	do_serial_menu
+else
+	# seems we need some time before mounting stuff...
+	sleep 3
+fi
+
+mountSystem
+
+mountStorage
+
+doOpenAOSUpdate
+
+readOpenAOSFeatures
+
+do_menu
+
+umountStorage
+
+releaseSerial
+
+unsetInputNodes
+
+configCompcache
+
+$UMOUNT /proc/bus/usb
+
+$UMOUNT /sys
+$UMOUNT /proc
+
+log "SWITCHING TO REAL ROOT"
+exec switch_root $NEWROOT_DIR $ROOTFS_INIT "$@"

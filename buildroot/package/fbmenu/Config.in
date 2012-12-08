@@ -1,0 +1,10 @@
+config BR2_PACKAGE_FBMENU
+	bool "fbmenu"
+	help
+	  gen9 Fork of openAOS fbmenu_light (derived from the gen8 tree)
+	
+	  http://dev.openaos.org/wiki/FBMenu
+	  https://www.gitorious.org/archos-buildroots/gen8/blobs/master/custom/fbmenu_light/main.c
+
+	  The extracted fork can be found at:
+	  https://github.com/dTatham/fbmenu_light

@@ -1,0 +1,6 @@
+2012-12-08
+	Initial commit
+	Changes made to buildroot (2012-11 branch):
+		- Include package fbmenu
+		- Applied patch for external kernel-tree (unused so far, might
+		come in handy later)
