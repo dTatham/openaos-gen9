@@ -1,0 +1,13 @@
+--- linux-b82bf0c/arch/arm/mach-omap2/Makefile	2012-12-16 23:21:55.000000000 +0100
++++ linux-b82bf0c/arch/arm/mach-omap2/Makefile	2012-12-16 23:34:26.649374430 +0100
+@@ -363,6 +363,7 @@ obj-$(CONFIG_MACH_ARCHOS_A101H)		+= boar
+ 					   archos-jm20329.o
+ 
+ obj-$(CONFIG_MACH_ARCHOS)		+= archos-fixup.o \
++					   archos_high_charge.o \
++					   archos_pcb_temp_sensor.o \
++					   archos-gadget-detect.o \
+ 					   archos-battery.o \
+ 					   archos-leds.o \
+ 					   archos-memory.o \
+
